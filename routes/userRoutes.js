@@ -1,23 +1,17 @@
 const express = require('express');
 const app = express();
-const getAllUsers = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {},
-  });
-};
-
-const getUser = (req, res) => {};
-const createUser = (req, res) => {};
-
-const updateUser = (req, res) => {};
-
-const deleteUser = (req, res) => {};
-
 const router = express.Router();
+const userController = require('./../controllers/userController');
 app.use('/api/v1/users', router);
 
-router.route('/').get(getAllUsers).post(createUser);
-router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+router
+  .route('/')
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
+router
+  .route('/:id')
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;
